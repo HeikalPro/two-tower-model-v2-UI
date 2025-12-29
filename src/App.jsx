@@ -4,7 +4,8 @@ import RecommendationForm from './components/RecommendationForm';
 import ProductGrid from './components/ProductGrid';
 import './App.css';
 
-const API_ENDPOINT = 'http://34.203.221.132:8000/retrieve';
+// Use localhost for local development, or set via environment variable
+const API_ENDPOINT = import.meta.env.VITE_API_URL || 'http://localhost:8000/retrieve';
 
 function App() {
   const [products, setProducts] = useState([]);

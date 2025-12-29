@@ -41,8 +41,8 @@ npm run build
 
 ## API Configuration
 
-The app is configured to use the following endpoint:
-- **URL**: `http://34.203.221.132:8000/retrieve`
+The app is configured to use the local backend endpoint by default:
+- **URL**: `http://localhost:8000/retrieve` (default)
 - **Method**: POST
 - **Request Body**: 
   ```json
@@ -54,6 +54,35 @@ The app is configured to use the following endpoint:
     "k": 50
   }
   ```
+
+### Custom API Endpoint
+
+To use a different API endpoint, create a `.env` file in the root directory:
+```
+VITE_API_URL=http://your-api-url:8000/retrieve
+```
+
+## Local Development Setup
+
+### Running the Frontend and Backend Together
+
+1. **Start the Backend API** (on port 8000):
+   ```bash
+   # Your backend should be running on http://localhost:8000
+   # The /retrieve endpoint should be available
+   ```
+
+2. **Start the Frontend** (on port 3000):
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+3. **Access the Application**:
+   - Frontend: `http://localhost:3000`
+   - Backend API: `http://localhost:8000/retrieve`
+
+The frontend will automatically connect to the local backend API.
 
 ## Project Structure
 

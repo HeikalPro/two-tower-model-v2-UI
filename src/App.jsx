@@ -4,8 +4,27 @@ import RecommendationForm from './components/RecommendationForm';
 import ProductGrid from './components/ProductGrid';
 import './App.css';
 
-// Use localhost for local development, or set via environment variable
-const API_ENDPOINT = import.meta.env.VITE_API_URL || 'http://localhost:8000/retrieve';
+// Automatically detect API endpoint based on current host
+// This allows the app to work both locally and on cloud instances
+const getApiEndpoint = () => {
+  // First, check for explicit environment variable
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  
+  // Auto-detect based on current host (works for both localhost and cloud instances)
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    const protocol = window.location.protocol;
+    // Use the same host but port 8000 for the API
+    return `${protocol}//${host}:8000/retrieve`;
+  }
+  
+  // Fallback for SSR or other cases
+  return 'http://localhost:8000/retrieve';
+};
+
+const API_ENDPOINT = getApiEndpoint();
 
 function App() {
   const [products, setProducts] = useState([]);
